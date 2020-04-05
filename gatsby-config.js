@@ -1,11 +1,11 @@
 module.exports = {
   siteMetadata: {
     title: `Bulkan Evcimen`,
-    name: `Narative`,
+    name: ``,
     siteUrl: `https://bulkan-evcimen.com`,
-    description: `This is my blog`,
+    description: ``,
     hero: {
-      heading: `Welcome to my blog.`,
+      heading: `Software Engineer that plays the Ney.`,
       maxWidth: 652,
     },
     social: [

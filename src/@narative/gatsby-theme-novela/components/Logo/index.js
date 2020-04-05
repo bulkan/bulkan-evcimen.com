@@ -14,8 +14,7 @@ export default function Logo({ fill }) {
       baseProfile="basic"
       x="0px"
       y="0px"
-      width="25px"
-      height="25px"
+      height="45px"
       viewBox="0 0 25 25"
     >
       <g id="Isolation_Mode">

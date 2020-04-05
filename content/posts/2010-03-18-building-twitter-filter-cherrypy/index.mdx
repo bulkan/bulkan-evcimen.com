@@ -1,0 +1,301 @@
+---
+title: Building a Twitter Filter With CherryPy, Redis, and tweetstream`
+date: 2010-03-18
+author: Bulkan Evcimen
+tags: ["python", "redis", "cherrypy", "twitter"]
+slug: building_twitter_filter_cherrypy_redis_tweetstream
+
+---
+
+## Background  
+
+_All the code is available at https://github.com/bulkan/queshuns_
+
+Since reading [this post by Simon Willison](https://simonwillison.net/2009/Oct/22/redis/)
+I've been interested in [Redis](https://code.google.com/p/redis) and have been following
+its development. After having a quick play around with Redis I've been looking
+for a project to work on that uses Redis as a data store. I then came across this [blog post](https://www.digitalhobbit.com/2009/11/08/building-a-twitter-filter-with-sinatra-redis-and-tweetstream/) by Mirko Froehlich, in which he shows the steps and code
+to create a Twitter filter using Redis as the datastore and Sinatra as the web app.
+This blog post will explain how I created [queshuns.com](https://queshuns.com)
+in Python and the various listed tools below.
+
+
+## Tools  
+
+
+* [tweetstream](https://pypi.python.org/pypi/tweetstream) - provides the interface to the Twitter Streaming API
+* [CherryPy](https://www.cherrypy.org/) - used for handling the web app side, no need for an ORM
+* [Jinja2](https://jinja.pocoo.org/2/) - HTML templating
+* [jQuery](https://jquery.com/) - for doing the AJAXy stuff and visual effects
+* [redis-py](https://github.com/andymccurdy/redis-py) - Python client for Redis
+* [Redis](https://code.google.com/p/redis/) - the "database", look here for the documenation on how to install it  
+
+
+## Retrieving tweets    
+
+
+The first thing we need to is retrieve tweets from the Twitter Streaming API. Thankfully there
+is already a Python module that provides a nice interface called *tweetstream*. For more
+information about tweetstream look at the Cheeseshop page for its usage guide.   
+
+Here is the code for the *filter_daemon.py*, which when executed as a script from the command-line
+will start streaming tweets from Twitter that contain the words "why", "how", "when", "lol", "feeling"
+and the tweet must end in a question mark.  
+
+```python
+import time
+
+import redis
+import tweetstream
+
+from datetime import datetime
+
+try:
+    import simplejson as json
+except:
+    import json
+
+
+class FilterRedis(object):
+
+    key = "tweets"
+    r = redis.Redis()
+    r.connect()
+    num_tweets = 20
+    trim_threshold = 100
+
+    def __init__(self):
+        self.trim_count = 0
+
+
+    def push(self, data):
+        self.r.push(self.key, data, True)
+
+        self.trim_count += 1
+        if self.trim_count >= self.trim_threshold:
+            self.r.ltrim(self.key, 0, self.num_tweets)
+            self.trim_count = 0
+
+
+    def tweets(self, limit=15, since=0):
+        data = self.r.lrange(self.key, 0, limit - 1)
+        return [json.loads(x) for x in data if int(json.loads(x)['received_at']) > since]
+
+
+if __name__ == '__main__':
+    fr = FilterRedis()
+
+    words = ["why", "how", "when", "lol", "feeling"]
+
+    username = "your twitter username"
+    password = "password for twitter account"
+
+    with tweetstream.TrackStream(username, password, words) as stream:
+        for tweet in stream:
+            if 'text' not in tweet: continue
+            if '@' in tweet['text'] or not tweet['text'].endswith('?'):
+                continue
+            fr.push(json.dumps( {'id':tweet['id'],
+                                 'text':tweet['text'],
+                                 'username':tweet['user']['screen_name'],
+                                 'userid':tweet['user']['id'],
+                                 'name':tweet['user']['name'],
+                                 'profile_image_url':tweet['user']['profile_image_url'],
+                                 'received_at':time.time()}
+                                 )
+                    )
+            print tweet['user']['screen_name'],':', tweet['text'].encode('utf-8')
+```
+
+In this script I define a class, _FilterRedis_ which I use to abstract some methods that will
+be used by both *filter_daemon.py* and later by the web app itself.  
+
+The important part of this class is the _push_ method, which will push *data* onto the tail of a Redis
+list. It also keeps a count of items and when it goes over the threshold of 100 items,
+it will trim starting from the head and the first 20th elements (or the oldest tweets).
+
+The *schema* for the tweet data that gets pushed into the Redis list is a dictionary
+of values that gets jsonified (we can probably use then new Redis hash type);
+
+```json
+ { 
+   "id":"the tweet id",
+   "text":"text of the tweet",
+   "username":"",
+   "userid":"userid",
+   "name": "name of the twitter user",
+   "profile_image_url": "url to profile image",
+   "received_at": time.time() 
+}
+```
+
+'received_at' is important because we will be using that to find *new* tweets to
+display in the web app.
+
+
+
+## Web App     
+
+I picked CherryPy to write the web application, because I wanted to learn it for the future
+when I need to write a small web frontends that dont need an ORM. Also, CherryPy has a built-in
+HTTP server that is *sufficient* for websites with small loads, which I initially used to run
+[queshuns.com](https://queshuns.com) it is now being run with mod_python. For templating, I used Jinja2 because its similair
+in syntax to the Django templating language that I am familiar with.   
+
+The following is the code for *questions_app.py* which is the CherryPy application.
+
+```python
+import time
+import os
+
+import cherrypy
+import jinja2
+
+from filter_daemon import *
+
+try:
+    import json
+except:
+    import simplejson as json
+
+from simplejson import JSONEncoder
+encoder = JSONEncoder()
+
+def jsonify_tool_callback(*args, **kwargs):
+  response = cherrypy.response
+  response.headers['Content-Type'] = 'application/json'
+  response.body = encoder.iterencode(response.body)
+
+cherrypy.tools.jsonify = cherrypy.Tool('before_finalize', jsonify_tool_callback, priority=30) 
+
+root_path = os.path.dirname(__file__)
+
+# jinja2 template renderer
+env = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.join(root_path, 'templates')))
+def render_template(template,**context):
+  global env
+  template = env.get_template(template+'.jinja')
+  return template.render(context)
+
+
+class Questions(object):
+  _cp_config = { 
+    'tools.encode.on':True,
+    'tools.encode.encoding':'utf8',
+  } 
+
+  fr = FilterRedis()
+
+  @cherrypy.expose()
+  def index(self):
+    tweets =  self.fr.tweets(since=0)
+    return render_template('index', tweets=tweets)
+
+  @cherrypy.expose()
+  @cherrypy.tools.jsonify()
+  def latest(self, since, nt):
+    if not since:
+      since = 0
+
+    tweets = self.fr.tweets(limit=5, since=float(since))
+    return render_template('tweets', tweets=tweets)
+
+if __name__ == '__main__':
+  cherrypy.quickstart(Questions())
+```
+
+The _index_ (method) of the web app will get the all the tweets from Redis. The other exposed  
+function is _latest_ which accepts an argument *since* which is used to get
+tweets that are newer (_since_ is the latest tweets received_at value). *nt* is
+used to create a different URL each time so that IE doesn't cache it. This method returns
+JSON at.
+
+The templates are located in a directory called _templates_ :)
+
+Here is the template for the root/index of the site; index.jinja  
+
+```html
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Queshuns</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function refreshTweets() {
+        $.getJSON('/latest', {since: window.latestTweet, nt:(new Date()).getTime()},
+          function(data) {
+            $('#content').prepend(data[0]); 
+            $('.latest').slideDown('slow', function() { $(this).removeClass('latest');});
+            $('#content div:gt(50)').remove(); 
+            setTimeout(refreshTweets, 10000);
+          });
+        };
+
+      $(function() { setTimeout(refreshTweets, 10000); });
+    </script>   
+
+    <div id='content'>
+    {% for tweet in tweets %}
+    <div>
+      <h1><a href="http://twitter.com/{{ tweet.username }}/status/{{ tweet.id }}" class="more">{{ tweet.username }}</a> </h1> 
+      <div>
+        <p> 
+          <img height=45 width=48 src="{{ tweet.profile_image_url }}">
+          <span> {{ tweet.text }} <span>
+        </p>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+
+  {% if tweets %}
+  <script type="text/javascript">
+    window.latestTweet = {{ tweets.0.received_at }};
+  </script>
+  {% else %}
+  <script type="text/javascript">
+    window.latestTweet = 0;
+  </script>
+  {% endif %}
+  </body>
+  </html>
+```
+
+This template will be used to render a list of tweets and also assign the first
+tweets *recieved_at* value to a variable on the *window* object. This is used by
+the *refreshTweets* function which will pass it on to `/latest` in a GET parameter.
+*refreshTweets* will try to get new tweets and prepend it to the *content* div
+and then slide the *latest* tweets. This is the template used to render the HTML
+for the latest tweets;  
+
+
+```html
+{% if tweets %}
+<div class='latest' style='display:none;'>
+{% for tweet in tweets %}
+<div>
+  <h1><a href="http://twitter.com/{{ tweet.username }}/status/{{ tweet.id }}" class="more">{{ tweet.username }}</a> </h1> 
+  <div class="entry">
+    <p> 
+      <img align='left' height=45 width=48 src="{{ tweet.profile_image_url }}"></img>
+      <span> {{ tweet.text }}</span>
+    </p>
+  </div>
+</div>
+{% endfor %}
+
+<script>
+    window.latestTweet = {{ tweets.0.received_at }};
+</script>
+</div>
+{% endif %}
+```
+
+I explicitly set the the *latest* div to "display: none" so that I can animate it.
+
+Now we should be able to run questions_daemon.py to start retrieving tweets then start
+questions_app.py to look at the web app. On your browser go to https://localhost:8080/
+and if everything went correctly you should see a list of tweets that update every 10 seconds.
+
+Thats it. Hope this was helpful.
