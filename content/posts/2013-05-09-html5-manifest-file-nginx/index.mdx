@@ -2,11 +2,14 @@
 title: "HTML5 Manifest File & Nginx"
 status: "published"
 date: "2013-05-09"
+hero: ./images/hero.jpg
 author: Bulkan Evcimen
 tags: ["html5", "javascript", "manifest file", "nginx", "limejs"]
 slug: "html5_manifest_file_nginx"
 
 ---
+
+[Photo by Clément H on Unsplash](https://unsplash.com/photos/95YRwf6CNw8)
 
 Ive been developing a HTML5 game using the LimeJS framework. As I am targetting iPhone and iPod Touches I asked my lovely <del>girlfriend</del> [fiance](https://aurorachiarello.com) to design me an app icon and hopefully In the near future she will also have give startup images too.
 
@@ -14,7 +17,7 @@ As I dont want to load the icon and startup images via the __network__ every tim
 
 To load a `manifest` file you need to add an attribute called `manifest` that points to your manifest file. It can be a relative path.
 
-```
+```html
 <!DOCTYPE HTML>
 <html manifest="mysite.manifest">
 ...
@@ -22,7 +25,7 @@ To load a `manifest` file you need to add an attribute called `manifest` that po
 
 Here is how the rest of my HTML file looks like
 
-```
+```html
 ...
 <head>
     <title>site</title>
@@ -36,7 +39,7 @@ Here is how the rest of my HTML file looks like
 
 The `manifest` file tells the browser which files to store locally, the syntax for it kind of reminds me of INI files, but not quite. My manifest file looks like following;
 
-```
+```text
 CACHE MANIFEST
 /assets/icon.png
 
