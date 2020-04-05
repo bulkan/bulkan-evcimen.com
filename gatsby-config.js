@@ -24,6 +24,7 @@ module.exports = {
     ],
   },
   plugins: [
+    'gatsby-plugin-netlify-cache',
     {
       resolve: "@narative/gatsby-theme-novela",
       options: {
@@ -53,6 +54,6 @@ module.exports = {
       options: {
         trackingId: "",
       },
-    },
+    }
   ],
 };
