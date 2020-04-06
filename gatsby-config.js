@@ -20,11 +20,11 @@ module.exports = {
       {
         name: `instagram`,
         url: `https://instagram.com/bulkan.evcimen`,
-      }
+      },
     ],
   },
   plugins: [
-    'gatsby-plugin-netlify-cache',
+    "gatsby-plugin-netlify-cache",
     {
       resolve: "@narative/gatsby-theme-novela",
       options: {
@@ -33,7 +33,7 @@ module.exports = {
         basePath: "/",
         sources: {
           local: true,
-          contentful: false
+          contentful: false,
         },
       },
     },
@@ -52,8 +52,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "",
+        trackingId: "UA-1620638-6",
       },
-    }
+    },
   ],
 };
