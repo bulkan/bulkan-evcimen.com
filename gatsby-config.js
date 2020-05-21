@@ -55,5 +55,6 @@ module.exports = {
         trackingId: "UA-1620638-6",
       },
     },
+    `@pauliescanlon/gatsby-mdx-embed`
   ],
 };
