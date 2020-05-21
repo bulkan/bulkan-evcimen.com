@@ -1,3 +1,3 @@
 # bulkan-evcimen.com
 
-Gatsby blog
+Using gatsby for a new blog.
