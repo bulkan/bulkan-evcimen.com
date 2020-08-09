@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Bulkan Evcimen`,
-    name: ``,
+    name: `Bulkan`,
     siteUrl: `https://bulkan-evcimen.com`,
     description: ``,
     hero: {
