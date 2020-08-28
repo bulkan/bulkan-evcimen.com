@@ -9,11 +9,11 @@ slug: "using_vuejs_parceljs_p5js"
 
 [Photo created by grid-art.bulkan.dev](https://grid-art.bulkan.dev/squiggles?seed=35655&pid=78)
 
-This is part two of a two part series. In [part one](/using_parceljs_typescript_p5js) I showed you how you can setup a project using parcel & TypeScript to create `p5.js` works. I recommend that you should read part one first especially if you’re following along.
+This is part two of a two part series. In [part one](/using_parceljs_typescript_p5js) I showed you how you can setup a project using parcel & TypeScript to create `p5.js` works. I recommend that you read part one first,  especially if you’re following along.
 
-Now we’re going to integrate `p5.js` within a Vue component. Why would you want to do something like this? Using a framework like Vue will help you create more complex works with p5.js. You can handle app state in `vue.js` and do routing. I've used this in creating the [hero image]((https://grid-art.bulkan.dev/squiggles?seed=35655&pid=78)) of the title.
+Now we’re going to integrate `p5.js` within a Vue component. Using a framework like Vue will help you create more complex works with p5.js. You can handle application state in `vue.js` and do routing. I've used this in creating a site with multiple p5.js works in which the random seed & the [selected palette](https://grid-art.bulkan.dev/squiggles?seed=35655&pid=78) id is updated in the URL so you can permalink to it.
 
-First we start off with the same two files as before `index.html` and a `index.ts` but we need to make some changes. First add a new `div` to the `index.html`.
+First we start off with the same two files as before `index.html` and a `index.ts` but we need to make some changes. First add a new `div` to the `index.html`;
 
 ```html
 <html>
@@ -63,7 +63,9 @@ export const makeArt = (node: HTMLElement) => {
 }
 ```
 
-Create a new `index.ts`
+We're exporting a new function `makeArt` that receives a `DOM` node (`HTMLElement`) which we pass to `p5` along with the `sketch` function when instantiating. We will call `makeArt` in the Vue layer.
+
+We have to recreate the `index.ts`.
 
 ```javascript
 import Vue from 'vue';
@@ -73,11 +75,11 @@ new Vue({
 }).$mount('#app');
 ```
 
-You might need to restart the `parcel` development server and you should notice that it will install vue.
+You might need to restart the `parcel` development server via `yarn run parcel index.html` and you should notice that it will install Vue.
 
-If you navigate to the URL that parcel prints out which is usually http://localhost:1234 you will see the page with a heading reading `hello world`. Nothing fancy but it means things are working.
+If you navigate to the URL that parcel prints out which is usually http://localhost:1234 you will see the page with the text `hello world`. Nothing fancy but it means things are working.
 
-We now need to create a component to help us wrap the p5.js code. Create a file named `Art.vue` next to `index.ts`; 
+Now letscreate a component to help us wrap the p5.js code. Create a file named `Art.vue` next to `index.ts`; 
 
 ```javascript
 <template>
@@ -96,9 +98,9 @@ export default Vue.extend({
 </script>
 ```
 
-This is creating a Vue component that just renders a div to be used a `div` to be used as the DOM node to render the canvas into. We pass a reference to this all the way down to the `p5` instantiation.  This is done in the `mounted` lifecycle to make sure the dom is rendered.
+This is creating a Vue component that just renders a `div` to be used as the DOM node to render the `canvas` into. We pass a __ref__erence to this all the way down to the `p5` instantiation.  This is done in the `mounted` lifecycle to make sure the DOM is completely rendered.
 
-We’re not using this component just yet, so lets update `index.ts` and register the component. The updated file should look like;
+We’re not using this component just yet, so lets update `index.ts` and register the component. The updated file should look like this;
 
 ```javascript
 import Vue from 'vue';
@@ -108,8 +110,11 @@ new Vue({
   render: createElement => createElement(Art)
 }).$mount('#app');
 ```
-You should see the following;
+
+Finally should see the following;
 
 ![Square Screenshot2](./images/screenshots/squares2_1.png)
 
-Thats all for this post. Thank you for reading.
+Thats all for this post. Hope this inspires you to experiment.
+
+Thank you for reading.
