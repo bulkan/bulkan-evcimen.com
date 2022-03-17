@@ -11,7 +11,7 @@ slug: "using_parceljs_typescript_p5js"
 
 This is part one of a two part series and you can read [Part two](/using_vuejs_parceljs_p5js).
 
-[p5.js](http://p5js.org/) is already great at being able to be used immedietely either with the [official editor](https://editor.p5js.org/) or loading it in via a 
+[p5.js](http://p5js.org/) is already great at being able to be used immediately either with the [official editor](https://editor.p5js.org/) or loading it in via a 
 `<script>` tag from a [cdn](https://cdnjs.com/libraries/p5.js).
 
 For more complex projects I find that using a bundler like [Parcel](https://parceljs.org/) with TypeScript helps with code organisation. 
@@ -20,7 +20,7 @@ Not to mention all the benefits of having types and modern JavaScript features.
 So lets start by installing [Parcel](https://parceljs.org/) .
 
 ```shell
-yarn init -y #This just creates a package.json
+yarn init -y # This just creates a package.json with some defaults.
 yarn add parcel-bundler
 ```
 
@@ -42,9 +42,9 @@ The above also references an `index.js` so create one next to the `index.html`. 
 document.body.innerHTML = '<b>test</b>';
 ```
 
-Don't about the contents above we're going to change it.
+Don't worry about the contents in the above snippet, we're going to change it soon.
 
-To run parcel use the following and then open up the url that parcel will output. If you're not running parcel it will be `http://localhost:1234`.
+To run parcel use the following and then open up the url that parcel will output.
 
 ```shell
 yarn run parcel index.html
@@ -54,7 +54,7 @@ You should see something like the following which means we have parcel working.
 
 ![Screenshot](./images/screenshots/html.png)
 
-Now onto p5js. If you've ever used p5 or Processing before you will highly likely be familiar with the global API in which all the functions are available globally or on the `window` object.
+Now onto p5js. If you've ever used p5 or Processing before you will highly likely be familiar with the global API in which all the functions are available globally. In the case of p5 that means it's on the `window` object.
 
 With the following approach we will be using what is called the [Instance Mode](https://p5js.org/examples/instance-mode-instantiation.html).
 
@@ -82,7 +82,7 @@ let sketch = function(p) {
 let myp5 = new p5(sketch);
 ```
 
-Once you save this file you should notice the parcel development fetch the required dependencies in this case it should've installed p5js and updated `package.json`.
+Once you save this file you should notice the parcel development server fetch the required dependencies, in this case it should've installed p5js and updated `package.json`.
 
 In addition to the that the page you loaded before should've have reloaded and it should look like the following screenshot.
 
@@ -131,7 +131,7 @@ const myp5 = new p5(sketch);
 
 Notice the new `rect` function? It's a simple way of dividing a square into rows and columns and then drawing a smaller square.
 
-You should see the squares look look like the following now.
+You should see the squares look like the following now.
 
 ![Square Screenshot](./images/screenshots/squares_1.png)
 
