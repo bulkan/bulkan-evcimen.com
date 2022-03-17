@@ -24,7 +24,6 @@ module.exports = {
     ],
   },
   plugins: [
-    "gatsby-plugin-netlify-cache",
     "gatsby-plugin-netlify",
     {
       resolve: "@narative/gatsby-theme-novela",
