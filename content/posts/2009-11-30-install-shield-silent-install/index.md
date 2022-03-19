@@ -1,10 +1,12 @@
 ---
 title: "Install Shield Silent Installs"
 author: Bulkan Evcimen
-hero: ./images/hero.jpg
 date: "2009-11-30"
 tags: ["installshield"]
 slug: "installshield_silent_installs"
+hero: 
+  src: ./images/hero.jpg
+  alt: Photo by Kristina Flour on Unsplash
 
 ---
 

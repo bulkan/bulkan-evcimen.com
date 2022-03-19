@@ -10,14 +10,33 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "dependencies": {
-    "@narative/gatsby-theme-novela": "^0.18.7",
-    "@pauliescanlon/gatsby-mdx-embed": "^0.0.29",
+    "@mdx-js/react": "^2.1.0",
     "gatsby": "^4.10.0",
+    "gatsby-plugin-feed": "^4.9.0",
+    "gatsby-plugin-gatsby-cloud": "^4.9.1",
     "gatsby-plugin-google-analytics": "^4.10.0",
+    "gatsby-plugin-image": "^2.9.1",
     "gatsby-plugin-manifest": "^4.10.0",
+    "gatsby-plugin-mdx-embed": "^1.0.0",
     "gatsby-plugin-netlify": "^4.1.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "gatsby-plugin-offline": "^5.9.1",
+    "gatsby-plugin-react-helmet": "^5.9.0",
+    "gatsby-plugin-sharp": "^4.9.1",
+    "gatsby-remark-copy-linked-files": "^5.9.0",
+    "gatsby-remark-images": "^6.9.1",
+    "gatsby-remark-prismjs": "^6.9.0",
+    "gatsby-remark-responsive-iframe": "^5.9.0",
+    "gatsby-remark-smartypants": "^5.9.0",
+    "gatsby-source-filesystem": "^4.9.1",
+    "gatsby-transformer-remark": "^5.9.1",
+    "gatsby-transformer-sharp": "^4.9.0",
+    "mdx-embed": "^1.0.0",
+    "prismjs": "^1.27.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "typeface-merriweather": "0.0.72",
+    "typeface-montserrat": "0.0.75"
   },
   "devDependencies": {
     "prettier": "^2.0.5"

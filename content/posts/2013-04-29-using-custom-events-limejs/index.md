@@ -1,7 +1,9 @@
 ---
 title: "Using Custom Events With LimeJS"
 date: "2013-04-29"
-hero: ./images/hero.jpg
+hero: 
+  src: ./images/hero.jpg
+  alt: Photo by Jason Dent on Unsplash
 author: Bulkan Evcimen
 tags: ["javascript", "limejs"]
 slug: "using_custom_events_with_limejs"

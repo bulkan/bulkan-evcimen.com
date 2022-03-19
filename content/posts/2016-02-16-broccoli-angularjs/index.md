@@ -2,7 +2,9 @@
 title: Broccoli and Angular.js
 date: 2016-02-16
 author: Bulkan Evcimen
-hero: ./images/charles-deluvio-la6DtkODelg-unsplash.jpg
+hero: 
+  src: ./images/charles-deluvio-la6DtkODelg-unsplash.jpg
+  alt: Photo by Charles Deluvio on Unsplash
 tags: ["node.js", "broccoli", "angular"]
 slug: "broccoli_and_angularjs"
 

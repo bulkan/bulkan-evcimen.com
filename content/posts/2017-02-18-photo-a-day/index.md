@@ -3,7 +3,9 @@ title: Photo a day challenge - Two months
 date:  2017-02-18
 tags: ["photography", "PhotoBlog365"]
 author: Bulkan Evcimen
-hero: ./images/bulkan-evcimen-bLSMN09NCss-unsplash.jpg
+hero: 
+  src: ./images/bulkan-evcimen-bLSMN09NCss-unsplash.jpg
+  alt: Photo by Bulkan Evcimen on Unsplash
 slug: "photo_a_day_challenge_two_months"
 ---
 

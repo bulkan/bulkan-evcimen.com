@@ -3,7 +3,9 @@ title: "Using mockery to mock modules for Node.js testing"
 date: "2014-04-24"
 tags: ["node.js", "mocha", "sinon.js", "should.js", "request", "javascript", "mockery"]
 author: Bulkan Evcimen
-hero: ./images/artem-sapegin-ZMraoOybTLQ-unsplash.jpg
+hero: 
+  src: ./images/artem-sapegin-ZMraoOybTLQ-unsplash.jpg
+  alt: Photo by Artem Sapegin on Unsplash
 slug: "using_mockery_to_mock_modules_nodejs"
 
 ---

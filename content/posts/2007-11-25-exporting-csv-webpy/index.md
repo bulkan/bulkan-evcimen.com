@@ -3,7 +3,9 @@ title: "Exporting a csv file with web.py"
 date: "2007-11-25"
 tags: ["python", "web.py"]
 author: Bulkan Evcimen
-hero: ./images/hero.jpg
+hero: 
+  src: ./images/hero.jpg
+  alt: Photo by Mika Baumeister on Unsplash
 slug: "exporting-csv-file-with-webpy"
 
 ---

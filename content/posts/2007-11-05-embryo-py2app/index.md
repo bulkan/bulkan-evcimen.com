@@ -3,7 +3,9 @@ title: "embryo.py and py2app awesomeness"
 date: "2007-11-05"
 author: Bulkan Evcimen
 tags: ["python", "py2app"]
-hero: ./images/bulkan-evcimen-XMIUTUQ75Q4-unsplash.jpg
+hero: 
+  src: ./images/bulkan-evcimen-XMIUTUQ75Q4-unsplash.jpg
+  alt: Photo by Bulkan Evcimen on Unsplash https://unsplash.com/photos/XMIUTUQ75Q4
 slug: "embryopy-and-py2app-awesomeness"
 
 ---

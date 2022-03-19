@@ -2,7 +2,9 @@
 title: "Running QTP tests using Python"
 date: "2009-09-18"
 author: Bulkan Evcimen
-hero: ./images/hero.jpg
+hero: 
+  src: ./images/hero.jpg
+  alt: Photo by Bruce Tang on Unsplash
 tags: ["qtp", "python", "com", "testing"]
 slug: "running_qtp_test_using_python"
 

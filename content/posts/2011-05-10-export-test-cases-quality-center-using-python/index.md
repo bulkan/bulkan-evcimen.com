@@ -1,7 +1,9 @@
 ---
 title: "Export Test Cases From Quality Center Using Python"
 date: "2011-05-10"
-hero: ./images/hero.jpg
+hero: 
+  src: ./images/hero.jpg
+  alt: Photo by Dieter de Vroomen on Unsplash
 author: Bulkan Evcimen
 tags: ["python", "quality center"]
 slug: "export_test_cases_quality_center_using_python"

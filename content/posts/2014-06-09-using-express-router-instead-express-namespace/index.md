@@ -2,7 +2,9 @@
 title: "Using Express Router instead of express-namespace"
 author: Bulkan Evcimen
 date: "2014-06-09"
-hero: ./images/webaroo-tN344soypQM-unsplash.jpg
+hero: 
+  src: ./images/webaroo-tN344soypQM-unsplash.jpg
+  alt: Photo by Webaroo on Unsplash
 tags: ["node.js", "express", "javascript"]
 slug: "using_express_router_instead_of_express_namespace"
 ---

@@ -2,7 +2,9 @@
 title: "Using Sequelize Migrations With An Existing Database"
 author: Bulkan Evcimen
 date: "2014-01-20"
-hero: ./images/kolar-io-lRoX0shwjUQ-unsplash.jpg
+hero: 
+  src: ./images/kolar-io-lRoX0shwjUQ-unsplash.jpg
+  alt: Photo by Kolar.io on Unsplash
 tags: ["node.js", "sql", "mysql"]
 slug: using-sequelize-migrations-with-an-existing-database
 

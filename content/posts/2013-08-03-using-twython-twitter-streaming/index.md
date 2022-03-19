@@ -2,7 +2,9 @@
 title: "Using Twython To Connect To The Twitter Streaming API via OAuth"
 date: "2013-08-03"
 author: Bulkan Evcimen
-hero: ./images/benjamin-balazs-PgLOQTUsy1c-unsplash.jpg
+hero: 
+  src: ./images/benjamin-balazs-PgLOQTUsy1c-unsplash.jpg
+  alt: Photo by Benjamin Balázs on Unsplash
 tags: ["python", "oauth", "twitter"]
 slug: "using_twython_to_connect_to_twitter_streaming_api_via_oauth "
 
