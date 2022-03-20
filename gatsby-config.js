@@ -137,10 +137,6 @@ module.exports = {
                       title
                       date
                       slug
-                      hero {
-                        src
-                        alt
-                      }
                     }
                   }
                 }
