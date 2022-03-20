@@ -63,7 +63,7 @@ const BlogPostTemplate = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
 
-  console.log({data})
+  // console.log({data})
 
   const image = getImage(post.frontmatter.hero.src)
 
