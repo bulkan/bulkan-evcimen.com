@@ -4,7 +4,9 @@ date:  2020-08-10
 updated: 2022-03-17
 tags: ["typescript", "p5js", "parcel"]
 author: Bulkan Evcimen
-hero: ./images/squares-1596514914470.png
+hero: 
+  src: ./images/squares-1596514914470.png
+  alt: Photo created by grid-art.bulkan.dev
 slug: "using_parceljs_typescript_p5js"
 ---
 

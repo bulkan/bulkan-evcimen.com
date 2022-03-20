@@ -3,7 +3,9 @@ title: Using Vuejs with Parcel and p5.js
 date: 2020-08-23
 tags: ["typescript", "p5js", "parcel", "vuejs"]
 author: Bulkan Evcimen
-hero: ./images/squiggles-534841-185.png
+hero: 
+  src: ./images/squiggles-534841-185.png
+  alt: Photo created by grid-art.bulkan.dev
 slug: "using_vuejs_parceljs_p5js"
 ---
 

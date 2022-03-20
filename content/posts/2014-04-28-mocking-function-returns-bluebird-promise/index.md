@@ -2,7 +2,9 @@
 title: "Mocking a function that returns a (bluebird) Promise"
 date: "2014-04-28"
 author: Bulkan Evcimen
-hero: ./images/zdenek-machacek-QU8sVc_J_fI-unsplash.jpg
+hero: 
+  src: ./images/zdenek-machacek-QU8sVc_J_fI-unsplash.jpg
+  alt: Photo by Zdeněk Macháček on Unsplash
 tags: ["node.js", "mocha", "sinon.js", "should.js", "javascript", "promise", "bluebird"]
 slug: "mocking_function_that_returns_promise"
 

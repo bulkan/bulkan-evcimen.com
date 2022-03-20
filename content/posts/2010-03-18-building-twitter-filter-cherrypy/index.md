@@ -1,7 +1,9 @@
 ---
 title: Building a Twitter Filter With CherryPy, Redis, and tweetstream`
 date: 2010-03-18
-hero: ./images/hero.jpg
+hero: 
+  src: ./images/hero.jpg
+  alt: Photo by Brooke Lark on Unsplash
 author: Bulkan Evcimen
 tags: ["python", "redis", "cherrypy", "twitter"]
 slug: building_twitter_filter_cherrypy_redis_tweetstream

@@ -1,7 +1,9 @@
 ---
 title: AngularJS & Popup Windows
 author: Bulkan Evcimen
-hero: ./images/sergi-ferrete-KxqN6vURlTI-unsplash.jpg
+hero: 
+  src: ./images/sergi-ferrete-KxqN6vURlTI-unsplash.jpg
+  alt: Photo by Sergi Ferrete on Unsplash
 date:  2014-04-14
 tags: ["node.js", "angularjs"]
 slug: angularjs_popup_windows_express

@@ -2,7 +2,9 @@
 title: "Writing a Linked List using Go - part one"
 date: "2014-05-31"
 author: Bulkan Evcimen
-hero: ./images/glenn-carstens-peters-RLw-UC03Gwc-unsplash.jpg
+hero: 
+  src: ./images/glenn-carstens-peters-RLw-UC03Gwc-unsplash.jpg
+  alt: Photo by Glenn Carstens-Peters on Unsplash
 tags: ["linked list", "golang", "go"]
 slug: "writing_linked_list_using_golang_part_one"
 

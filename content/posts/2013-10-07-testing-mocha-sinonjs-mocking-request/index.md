@@ -2,7 +2,9 @@
 title: Testing With Mocha, Sinon.js & Mocking Request
 date: "2013-10-07"
 author: Bulkan Evcimen
-hero: ./images/louis-hansel-shotsoflouis-uivcfHFZZcg-unsplash.jpg
+hero:
+  src: ./images/louis-hansel-shotsoflouis-uivcfHFZZcg-unsplash.jpg
+  alt: Photo by Louis Hansel @shotsoflouis on Unsplash
 slug: "testing_with_mocha_sinon"
 ---
 
